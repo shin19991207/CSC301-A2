@@ -1,6 +1,8 @@
 from flask import Blueprint, request
 import csv
 import codecs
+import psycopg2
+from config import connect_database
 
 time_series = Blueprint('time_series', __name__)
 
@@ -20,7 +22,16 @@ def load_data():
     file_name = file.filename
     print(file_name)
 
+    conn = connect_database()
+    cur = conn.cursor()
+    cur.execute("")
+    cur.close()
+    conn.commit()
+    conn.close()
+
     return "success"
+
+
 
 
 @time_series.route("/cases", methods=['POST'])
