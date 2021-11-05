@@ -11,14 +11,6 @@ env = os.environ.get('PYTHON_ENV')
 app.register_blueprint(daily_reports, url_prefix='/daily_reports')
 app.register_blueprint(time_series, url_prefix='/time_series')
 
-conn = setup_db()
-cur = conn.cursor()
-id = 1
-cur.execute(f"INSERT INTO testtable VALUES ({id});")
-cur.close()
-conn.commit()
-conn.close()
-
 
 @app.route("/")
 def hello():
@@ -26,6 +18,17 @@ def hello():
         return "production"
     else:
         return "Hello World!"
+
+
+@app.route("/insert", methods=['GET'])
+def insert():
+    conn = setup_db()
+    cur = conn.cursor()
+    cur.execute(f"INSERT INTO testtable VALUES (1);")
+    cur.close()
+    conn.commit()
+    conn.close()
+    return "success"
 
 
 if __name__ == '__main__':
