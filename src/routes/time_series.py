@@ -2,7 +2,7 @@ from flask import Blueprint, request
 import csv
 import codecs
 import psycopg2
-from config import connect_database
+from routes.config import connect_database
 
 time_series = Blueprint('time_series', __name__)
 
@@ -24,7 +24,7 @@ def load_data():
 
     conn = connect_database()
     cur = conn.cursor()
-    cur.execute("")
+    cur.execute("insert into testtable values (2);")
     cur.close()
     conn.commit()
     conn.close()
@@ -32,8 +32,10 @@ def load_data():
     return "success"
 
 
-
-
 @time_series.route("/cases", methods=['POST'])
 def query_data():
     return
+
+
+if __name__ == '__main__':
+    print("success")

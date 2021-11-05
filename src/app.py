@@ -3,7 +3,6 @@ import os
 from flask import Flask
 from routes.daily_reports import daily_reports
 from routes.time_series import time_series
-from config import connect_database
 
 app = Flask(__name__)
 env = os.environ.get('PYTHON_ENV')
