@@ -1,7 +1,5 @@
 import os
 
-from flask_cors import CORS
-
 from flask import Flask
 from routes.daily_reports import daily_reports
 from routes.time_series import time_series
