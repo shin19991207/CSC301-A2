@@ -3,7 +3,7 @@ import os
 from flask import Flask
 from routes.daily_reports import daily_reports
 from routes.time_series import time_series
-from models import setup_db
+from config import connect_database
 
 app = Flask(__name__)
 env = os.environ.get('PYTHON_ENV')
@@ -20,15 +20,15 @@ def hello():
         return "Hello World!"
 
 
-@app.route("/insert", methods=['GET'])
-def insert():
-    conn = setup_db()
-    cur = conn.cursor()
-    cur.execute(f"INSERT INTO testtable VALUES (1);")
-    cur.close()
-    conn.commit()
-    conn.close()
-    return "success"
+# @app.route("/insert", methods=['GET'])
+# def insert():
+#     conn = connect_database()
+#     cur = conn.cursor()
+#     cur.execute(f"INSERT INTO testtable VALUES (1);")
+#     cur.close()
+#     conn.commit()
+#     conn.close()
+#     return "success"
 
 
 if __name__ == '__main__':
