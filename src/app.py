@@ -6,8 +6,8 @@ from routes.time_series import time_series
 
 app = Flask(__name__)
 
-app.register_blueprint(daily_reports, url_prefix='/daily_reports')
-app.register_blueprint(time_series, url_prefix='/time_series')
+app.register_blueprint(daily_reports, url_prefix='/daily_reports', debug=True)
+app.register_blueprint(time_series, url_prefix='/time_series', debug= True)
 
 
 @app.route("/")
