@@ -8,20 +8,22 @@ def return_json(cur, date, locations, types):
         location_data = copy.deepcopy(location)
 
         location['Country/Region'] = location['Country/Region'].replace("'", "''")
-        location['Province/State'] = location['Province/State'].replace("'", "''")
-        location['Combined_Key'] = location['Country/Region'].replace("'", "''")
+        if 'Province/State' in location:
+            location['Province/State'] = location['Province/State'].replace("'", "''")
+        if 'Combined_Key' in location:
+            location['Combined_Key'] = location['Country/Region'].replace("'", "''")
             
         if "Combined_Key" in location:
             query = "SELECT sum(confirmed), sum(deaths), sum(recovered), sum(active)" \
-                    "FROM daily_reports WHERE combined_key = {0} GROUP BY combined_key;" \
-                .format(location['Country/Region'])
+                    "FROM daily_reports WHERE combined_key = '{0}' GROUP BY combined_key;" \
+                .format(location['Combined_Key'])
         elif "Province/State" not in location:
             query = "SELECT sum(confirmed), sum(deaths), sum(recovered), sum(active)" \
-                    "FROM daily_reports WHERE region = {0} GROUP BY region;" \
+                    "FROM daily_reports WHERE region = '{0}' GROUP BY region;" \
                 .format(location['Country/Region'])
         else:
             query = "SELECT sum(confirmed), sum(deaths), sum(recovered), sum(active)" \
-                    "FROM daily_reports WHERE region = {0} and state = {1} GROUP BY region, state;" \
+                    "FROM daily_reports WHERE region = '{0}' and state = '{1}' GROUP BY region, state;" \
                 .format(location['Country/Region'], location['Province/State'])
         cur.execute(query)
         record = cur.fetchone()

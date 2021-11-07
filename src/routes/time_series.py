@@ -12,8 +12,6 @@ time_series = Blueprint('time_series', __name__)
 hard_column = ["Province/State", "Country/Region", "Lat", "Long"]
 
 
-# Test: curl -H "Content-Type: multipart/form-data" -F "file=@mydata.csv" http://localhost:5000/myroute
-# curl -H "Content-Type: text/csv" --data-binary "@datafile.csv" http://localhost:5000/myroute
 @time_series.route("/data", methods=['POST'])
 def load_data():
     # check the format and type parameter
@@ -34,26 +32,27 @@ def load_data():
     csv_file = pd.read_csv(buffer)
     Lat = csv_file['Lat']
     Long = csv_file['Long']
-    # check the data type
+    # check the latitude and longitude in the table
     if Lat.dtypes == "object" or Long.dtypes == "object":
-        return fail(400, "datatype error in Lat and Long column", "Latitude and Longitude should be floats or "
-                                                                  "integers and nothing else")
-
+        return fail(400, "datatype error in Lat and Long column",
+                    "Latitude and Longitude should be floats or integers and nothing else")
     # check the range of latitude and longitude
     if Lat.max() > 90 or Lat.min() < -90 or Long.max() > 180 or Long.max() < -180:
-        return fail(400, "error occur in Lat and Long column in the file ", "Latitudes range from -90 to 90 "
-                                                                            "inclusively, and longitudes range from "
-                                                                            "-180 to 80 "
-                                                                            " inclusively")
+        return fail(400, "error occur in Lat and Long column in the file ",
+                    "Latitudes range from -90 to 90 inclusively, and longitudes range from -180 to 80"
+                    " inclusively")
 
     # check if the column of upcoming file are the same as files in github repo
     if zero_row[0:4] != hard_column:
         return fail(400, "the content of the upcoming file does not meet expectation",
-                    "please check if your file miss a column suggested in the "
-                    "link:https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data"
-                    "/csse_covid_19_time_series")
-
+                    f"please check if your file miss a column suggested in the link:https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
     # TODO: check whether the value of country and region are strings
+    # for i in range(len(csv_file)):
+    #     print("country type", type(csv_file.iloc[i, 0]), "\ncoutnry", csv_file.iloc[i, 0])
+    #     if str(csv_file.iloc[i, 0]) != 'nan' and not isinstance(csv_file.iloc[i, 0], str) and not isinstance(csv_file.iloc[i, 1], str):
+    #         return fail(400, "the content of the upcoming file does not meet expectation",
+    #                     "please check if the column Province/State and column Country/Region only"
+    #                     "contain strings if not empty")
 
     # check if the numbers of people in the column are integers
     types = csv_file.iloc[:, 4:].dtypes
@@ -70,6 +69,7 @@ def load_data():
     dates_create = ""
     column_name = "State,Region"
     acc_column = 2
+    # print("zero_row", zero_row[4:])
     for date in zero_row[4:]:
         acc_column += 1
         # format date into format mm/dd/yy
@@ -80,26 +80,22 @@ def load_data():
     cur.execute(f'{fixed + dates_create})')
     conn.commit()
     for i in range(len(csv_file)):
-        state = str(csv_file.iloc[i, 0])
-        modified_state = state.replace("'", "''")
-        region = str(csv_file.iloc[i, 1])
-        modified_region = region.replace("'", "''")
-        insertion_str = f"'{modified_state}', '{modified_region}'"
-        print("insert str", insertion_str)
-        acc_value = 2
-
-        for j in range(4, len(csv_file.iloc[i, :])):
-            acc_value += 1
-            insertion_str = insertion_str + ',' + str(csv_file.iloc[i, j])
+        modified_state = str(csv_file.iloc[i, 0]).replace("'", "''")
+        modified_region = str(csv_file.iloc[i, 1]).replace("'", "''")
+        acc_value = 2 + len(csv_file.iloc[0, 4:].apply(str).values)
+        insertion_str = f"'{modified_state}', '{modified_region}'," + ",".join(csv_file.iloc[i, 4:].apply(str).values)
         insertion = f'insert into {table_name}({column_name}) values ({insertion_str})'
-        print("insertion str\n", insertion_str)
         cur.execute(insertion)
         conn.commit()
-
+    cur.execute(f'select * from {table_name};')
+    if len(csv_file) != cur.rowcount:
+        return fail(500, "insertions to the table are not finished appropriately",
+                    "the number of rows in the table is different from the number of rows in the upcoming file")
     cur.close()
-    conn.commit()
     conn.close()
-    return "success"
+    # print("date_column: ", acc_column, "\ndate_value: ", acc_value, "\nnum of rows", len(csv_file))
+    msg = jsonify({"message": "your file is successfully updated"})
+    return make_response(msg, 200)
 
 
 @time_series.route("/cases", methods=['POST'])

@@ -6,7 +6,7 @@ Query data by countries, time period, and cases types to get the data of the COV
 
 **Method**: `POST`
 
-**Required Parameters:**
+**Required Body:**
 
 <table>
 <tr> 
@@ -36,7 +36,7 @@ Query data by countries, time period, and cases types to get the data of the COV
 ```json
 [
   { 
-    "Country/Region": "Albania"
+    "Country/Region": "Belgium"
   },
   { 
     "Country/Region": "Canada", 
@@ -104,15 +104,17 @@ OR
 
 **Sample Call**:
 ```
-$ curl -d '{ "return_type" : "json",
-             "start_date": "02/21/20",
-             "end_date": "2/26/20",
-             "types": ["Confirmed"],
+$ curl -d '{ "return_type" : "json",  
+             "date": "01/01/21",
+             "types": [ "Confirmed", "Deaths", "Active" ],
              "locations":
-                [ {"Country/Region": "Albania"},  
-                  {"Country/Region": "Canada", "Province/State": "Ontario"},
-                  {"Country/Region": "Australia"}
-                ]
+             [
+              { "Country/Region": "Belgium" },
+              { "Country/Region": "Canada", "Province/State": "Ontario"},
+              { "Country/Region": "Australia", 
+                "Province/State": "Queensland", 
+                "Combined_Key": "Australian Capital Territory, Australia"}
+             ]
            }' 
         -H "Content-Type: application/json" 
         -X POST https://covid-monitor-61.herokuapp.com/time_series/cases
