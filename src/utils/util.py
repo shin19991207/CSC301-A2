@@ -27,3 +27,6 @@ def check_request(required_parameters, json_data):
     return [missing_parameters_str, missing_country_region_str]
 
 
+def replace_single_quote(location, column):
+    c = location[column]
+    location[column] = c[0:c.find("'")] + "''" + c[c.find("'") + 1:]

@@ -167,7 +167,7 @@ def query_data():
         else:
             return_data = return_csv(json_data, date_range, types)
             content_type = "text/csv"
-        response = make_response(jsonify({"Data": return_data}), 200, )
+        response = make_response(return_data, 200,)
         response.headers["Content-Type"] = content_type
         return response
     except psycopg2.Error as e:

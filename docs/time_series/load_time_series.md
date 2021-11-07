@@ -21,14 +21,14 @@ Upload or update a time series formatted file.
 
 **Success Response**:
 
-* **Code**: 200
-* **Content**: {}
+* **Code**: `200 OK`
+* **Content**: `{}`
 
 
 **Error Response**:
 
-* **Code**: 400 Bad Request
-* **Content**: {}
+* **Code**: `400 Bad Request`
+* **Content**: `{}`
 
 **Sample Call**:
 ```
