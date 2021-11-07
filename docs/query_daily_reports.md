@@ -83,9 +83,9 @@ Query data by countries, time period, and cases types to get the data of the COV
 * **Content**: 
   ```json
   { 
-    'code': 400, 
-    'message': "No data for the given date", 
-    'detail': "No daily report existed for the given date" 
+    "code": 400, 
+    "message": "No data for the given date", 
+    "detail": "No daily report existed for the given date" 
   }
   ```
 
@@ -95,9 +95,9 @@ OR
 * **Content**: 
   ```json
   { 
-    'code': 500, 
-    'message': "Internal Server Error", 
-    'detail': "PlpgsqlError" 
+    "code": 500, 
+    "message": "Internal Server Error", 
+    "detail": "PlpgsqlError" 
   }
   ```
 
