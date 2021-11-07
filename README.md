@@ -26,7 +26,7 @@ To ensure proper configuration while running on a local machine, ensure that you
 
 #### Accessing the API Online
 
-The API is deployed to https://covid-monitor-61.herokuapp.com/ and calls can be made according to the [REST API Documentation](#REST API Documentation
+The API is deployed to https://covid-monitor-61.herokuapp.com/ and calls can be made according to the [REST-API-Documentation](REST API Documentation
 ).
 
 
