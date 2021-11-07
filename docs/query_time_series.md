@@ -82,7 +82,7 @@ Query data by countries, time period, and cases types to get the data of the COV
 
 **Error Response**
 
-Code: `400`
+Code: `400 Bad Request`
 
-Code: 
+Code: `500 Internal Server Error`
 
