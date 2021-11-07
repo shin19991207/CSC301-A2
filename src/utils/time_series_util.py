@@ -59,9 +59,10 @@ def return_csv(json_data, date_range, types):
 def check_query_data_active(cur):
     needed_types = ["Confirmed", "Deaths", "Recovered"]
     for type in needed_types:
-        query = "SELECT EXISTS(SELECT * FROM information_schema.tables WHERE table_name = {0});".format(type)
-        cur.execute(query)
-        if cur.fetchone()[0] == 'f':
+        try:
+            query = "SELECT * FROM {0};".format(type)
+            cur.execute(query)
+        except psycopg2.Error:
             return False
     return True
 

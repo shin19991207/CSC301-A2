@@ -147,4 +147,4 @@ def query_data():
         return response
     except psycopg2.Error as e:
         print(e.diag.message_detail)
-        return fail(500, "Internal Server Error", e.pgerror)
+        return fail(400, "Internal Server Error", e.pgerror)
