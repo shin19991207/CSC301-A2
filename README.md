@@ -41,3 +41,4 @@ The API is deployed to https://covid-monitor-61.herokuapp.com/ and calls can be 
 * [Query Time Series Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/develop/docs/query_time_series.md)
 * [Load Daily Reports Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/develop/docs/load_daily_reports.md)
 * [Query Daily Reports Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/develop/docs/query_daily_reports.md)
+# a2_cicd
