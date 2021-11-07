@@ -21,8 +21,8 @@ To ensure proper configuration while running on a local machine, ensure that you
   DB_USER=<username for accessing database>
   ```
   
- 2. Create a virtualenv named `venv` using `$ python -m venv venv`
- 3. Activate the virtualenv using `$ source myproject/bin/activate` (Mac OS & Linux)
+ 2. Create a virtualenv named `venv` using `$ python3 -m venv venv`
+ 3. Activate the virtualenv using `$ source venv/bin/activate` (Mac OS & Linux)
  4. Install the required libraries from `pip` using `$ pip install -r requirements.txt`
  5. Run the API using `$ python3 src/app.py`
  6. This should get our API running on http://localhost:5000/. Calls can be made according to the [REST-API-Documentation](#rest-api-documentation) on the root url.
