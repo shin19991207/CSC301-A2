@@ -1,6 +1,5 @@
 import psycopg2
 import copy
-from utils.util import replace_single_quote
 
 
 def return_json(cur, date_range, locations, types):
@@ -9,30 +8,28 @@ def return_json(cur, date_range, locations, types):
         return_data[date] = []
         for location in locations:
             location_data = copy.deepcopy(location)
-            if "'" in location['Country/Region']:
-                replace_single_quote(location, 'Country/Region')
-            if "'" in location['Province/State']:
-                replace_single_quote(location, 'Province/State')
-                
+            location['Country/Region'] = location['Country/Region'].replace("'", "''")
+            if 'Province/State' in location:
+                location['Province/State'] = location['Province/State'].replace("'", "''")
             for type in types:
                 records = {}                
                 location_str = "region = '{0}'".format(location['Country/Region']) \
                     if "Province/State" not in location \
                     else "region = '{0}' AND state = '{1}'".format(location['Country/Region'], location['Province/State'])
                 if type == "Confirmed" or type == "Active":
-                    confirmed_query = "SELECT sum('{0}') FROM Confirmed WHERE ".format(date) + \
+                    confirmed_query = "SELECT sum(\"{0}\") FROM Confirmed WHERE ".format(date) + \
                                       location_str + " GROUP BY region, state;"
                     cur.execute(confirmed_query)
                     confirmed_record = cur.fetchone()
                     records['Confirmed'] = None if confirmed_record is None else confirmed_record[0]
                 if type == "Deaths" or type == "Active":
-                    deaths_query = "SELECT sum('{0}') FROM Deaths WHERE ".format(date) + \
+                    deaths_query = "SELECT sum(\"{0}\") FROM Deaths WHERE ".format(date) + \
                                       location_str + " GROUP BY region, state;"
                     cur.execute(deaths_query)
                     deaths_record = cur.fetchone()
                     records['Deaths'] = None if deaths_record is None else deaths_record[0]
                 if type == "Recovered" or type == "Active":
-                    recovered_query = "SELECT sum('{0}') FROM Deaths WHERE ".format(date) + \
+                    recovered_query = "SELECT sum(\"{0}\") FROM Deaths WHERE ".format(date) + \
                                       location_str + " GROUP BY region, state;"
                     cur.execute(recovered_query)
                     recovered_record = cur.fetchone()

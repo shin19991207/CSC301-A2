@@ -1,18 +1,15 @@
 import psycopg2
 import copy
-from utils.util import replace_single_quote
 
 
 def return_json(cur, date, locations, types):
     return_data = {"Date": date, "Reports": []}
     for location in locations:
         location_data = copy.deepcopy(location)
-        if "'" in location['Country/Region']:
-            replace_single_quote(location, 'Country/Region')
-        if "'" in location['Province/State']:
-            replace_single_quote(location, 'Province/State')
-        if "'" in location['Combined_Key']:
-            replace_single_quote(location, 'Combined_Key')
+
+        location['Country/Region'] = location['Country/Region'].replace("'", "''")
+        location['Province/State'] = location['Province/State'].replace("'", "''")
+        location['Combined_Key'] = location['Country/Region'].replace("'", "''")
             
         if "Combined_Key" in location:
             query = "SELECT sum(confirmed), sum(deaths), sum(recovered), sum(active)" \

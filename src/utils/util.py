@@ -1,6 +1,11 @@
+from flask import jsonify, make_response
+
+
 # return error message to help users to change request
 def fail(code, message, detail):
-    return jsonify({'code': code, 'message': message, 'detail': detail})
+    return_data = jsonify({'code': code, 'message': message, 'detail': detail})
+    response = make_response(return_data, code, )
+    return response
 
 
 def check_request(required_parameters, json_data):
@@ -27,6 +32,3 @@ def check_request(required_parameters, json_data):
     return [missing_parameters_str, missing_country_region_str]
 
 
-def replace_single_quote(location, column):
-    c = location[column]
-    location[column] = c[0:c.find("'")] + "''" + c[c.find("'") + 1:]

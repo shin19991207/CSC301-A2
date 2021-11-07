@@ -1,4 +1,4 @@
-# Time Series Query Data
+# Query Time Series Data
 
 Query data by countries, time period, and cases types to get the data of the COVID cases type specified.
 
@@ -66,23 +66,110 @@ Query data by countries, time period, and cases types to get the data of the COV
 **Success Response**
 
 * Code: `200`
+* Content:
+  * Content-Type: `application/json`
+  * Returned data in json format
 
-  * json format returned data
-
-    ```json
-    { 
-    }
-    ```
-
-  * [x] for csv data
-    
-    ```
-    
-    ```
+  ```json
+  {
+    "01/26/20": [
+      {
+        "Confirmed": 0, 
+        "Country/Region": "Albania"
+      }, 
+      {
+        "Confirmed": 1, 
+        "Country/Region": "Canada", 
+        "Province/State": "Ontario"
+      }, 
+      {
+        "Confirmed": 0, 
+        "Country/Region": "Australia"
+      }
+    ], 
+    "01/27/20": [
+      {
+        "Confirmed": 0, 
+        "Country/Region": "Albania"
+      }, 
+      {
+        "Confirmed": 1, 
+        "Country/Region": "Canada", 
+        "Province/State": "Ontario"
+      }, 
+      {
+        "Confirmed": 0, 
+        "Country/Region": "Australia"
+      }
+    ], 
+    "01/28/20": [
+      {
+        "Confirmed": 0, 
+        "Country/Region": "Albania"
+      }, 
+      {
+        "Confirmed": 1, 
+        "Country/Region": "Canada", 
+        "Province/State": "Ontario"
+      }, 
+      {
+        "Confirmed": 0, 
+        "Country/Region": "Australia"
+      }
+    ]
+  }
+  ```
+  * Content-Type: `text/csv`
+  * Returned data in csv format
+  ```
+  Date,Province/State,Country/Region,Confirmed
+  01/26/20,,Albania,0
+  01/26/20,Ontario,Canada,1
+  01/26/20,,Australia,0
+  01/27/20,,Albania,0
+  01/27/20,Ontario,Canada,1
+  01/27/20,,Australia,0
+  01/28/20,,Albania,0
+  01/28/20,Ontario,Canada,1
+  01/28/20,,Australia,0     
+  ```
 
 **Error Response**
 
-Code: `400`
+* **Code**: `400 Bad Request`
+* **Content**: 
+  ```json
+  { 
+    'code': 400, 
+    'message': "Wrong parameter value", 
+    'detail': "Parameter return_type must be json or csv" 
+  }
+  ```
 
-Code: 
+OR
 
+* **Code**: `500 Internal Server Error`
+* **Content**: 
+  ```json
+  { 
+    'code': 500, 
+    'message': "Internal Server Error", 
+    'detail': "PlpgsqlError" 
+  }
+  ```
+
+**Sample Call**:
+```
+$ curl -d '{ "return_type" : "json",
+             "start_date": "02/21/20",
+             "end_date": "2/26/20",
+             "types": ["Confirmed"],
+             "locations":
+                [ {"Country/Region": "Albania"},  
+                  {"Country/Region": "Canada", "Province/State": "Ontario"},
+                  {"Country/Region": "Australia"}
+                ]
+           }' 
+        -H "Content-Type: application/json" 
+        -X POST https://covid-monitor-61.herokuapp.com/time_series/cases
+```
