@@ -146,18 +146,6 @@ Query data by countries, time period, and cases types to get the data of the COV
   }
   ```
 
-OR
-
-* **Code**: `500 Internal Server Error`
-* **Content**: 
-  ```json
-  { 
-    "code": 500, 
-    "message": "Internal Server Error", 
-    "detail": "PlpgsqlError" 
-  }
-  ```
-
 **Sample Call**:
 ```
 $ curl -d '{ "return_type" : "json",
