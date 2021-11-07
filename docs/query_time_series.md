@@ -140,9 +140,9 @@ Query data by countries, time period, and cases types to get the data of the COV
 * **Content**: 
   ```json
   { 
-    'code': 400, 
-    'message': "Wrong parameter value", 
-    'detail': "Parameter return_type must be json or csv" 
+    "code": 400, 
+    "message": "Wrong parameter value", 
+    "detail": "Parameter return_type must be json or csv" 
   }
   ```
 
@@ -152,9 +152,9 @@ OR
 * **Content**: 
   ```json
   { 
-    'code': 500, 
-    'message': "Internal Server Error", 
-    'detail': "PlpgsqlError" 
+    "code": 500, 
+    "message": "Internal Server Error", 
+    "detail": "PlpgsqlError" 
   }
   ```
 
@@ -173,3 +173,4 @@ $ curl -d '{ "return_type" : "json",
         -H "Content-Type: application/json" 
         -X POST https://covid-monitor-61.herokuapp.com/time_series/cases
 ```
+
