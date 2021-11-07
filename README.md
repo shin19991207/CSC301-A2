@@ -23,7 +23,7 @@ To ensure proper configuration while running on a local machine, ensure that you
 
 2. Install the required libraries from `pip` using `$ pip install -r requirements.txt`
 3. Run the API using `$ python3 src/app.py`
-4. Call according to the [REST-API-Documentation](#rest-api-documentation) on root url http://localhost:5000/
+4. This should get our API running on http://localhost:5000/. Calls can be made according to the [REST-API-Documentation](#rest-api-documentation) on the root url.
 
 #### Accessing the API Online
 
