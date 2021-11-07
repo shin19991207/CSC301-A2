@@ -9,20 +9,30 @@ def return_json(cur, date_range, locations, types):
         for location in locations:
             location_data = copy.deepcopy(location)
             for type in types:
-                if "Province/State" not in location:
-                    query = "SELECT sum({0})" \
-                            "FROM {1} WHERE region = {2} " \
-                            "GROUP BY region;" \
-                        .format(date, type, location['Country/Region'])
-                else:
-                    query = "SELECT sum({0})" \
-                            "FROM {1} " \
-                            "WHERE region = {2} AND state = {3}" \
-                            "GROUP BY region, state;" \
-                        .format(date, type, location['Country/Region'], location['Province/State'])
-                cur.execute(query)
-                record = cur.fetchone()
-                location_data[type] = None if record is None else record[0]
+                records = {}
+                location_str = "region = {0}".format(location['Country/Region']) \
+                    if "Province/State" not in location \
+                    else "region = {0} AND state = {1}".format(location['Country/Region'], location['Province/State'])
+                if type == "Confirmed" or type == "Active":
+                    confirmed_query = "SELECT sum({0}) FROM Confirmed WHERE ".format(date) + \
+                                      location_str + " GROUP BY region, state;"
+                    cur.execute(confirmed_query)
+                    confirmed_record = cur.fetchone()
+                    records['Confirmed'] = None if confirmed_record is None else confirmed_record[0]
+                if type == "Deaths" or type == "Active":
+                    deaths_query = "SELECT sum({0}) FROM Deaths WHERE ".format(date) + \
+                                      location_str + " GROUP BY region, state;"
+                    cur.execute(deaths_query)
+                    deaths_record = cur.fetchone()
+                    records['Deaths'] = None if deaths_record is None else deaths_record[0]
+                if type == "Recovered" or type == "Active":
+                    recovered_query = "SELECT sum({0}) FROM Deaths WHERE ".format(date) + \
+                                      location_str + " GROUP BY region, state;"
+                    cur.execute(recovered_query)
+                    recovered_record = cur.fetchone()
+                    records['Recovered'] = None if recovered_record is None else recovered_record[0]
+                location_data[type] = records[type.capitalize()] if type.capitalize() != "Active" \
+                    else records['Confirmed'] - records['Deaths'] - records['Recovered']
             return_data[date].append(location_data)
     return return_data
 
