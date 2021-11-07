@@ -11,7 +11,7 @@ def return_json(cur, date, locations, types):
         if 'Province/State' in location:
             location['Province/State'] = location['Province/State'].replace("'", "''")
         if 'Combined_Key' in location:
-            location['Combined_Key'] = location['Country/Region'].replace("'", "''")
+            location['Combined_Key'] = location['Combined_Key'].replace("'", "''")
             
         if "Combined_Key" in location:
             query = "SELECT sum(confirmed), sum(deaths), sum(recovered), sum(active)" \
