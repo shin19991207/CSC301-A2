@@ -93,13 +93,13 @@ class TestUtils(unittest.TestCase):
         result = time_series_return_csv(json_data, ["01/26/20"], ["Confirmed"])
         self.assertEqual(result, expected)
 
-    def test_check_query_data_active(self):
-        conn = connect_database()
-        cur = conn.cursor()
-        # create a test table in the database with the table format of a daily report
-        cur.execute("DROP TABLE IF EXISTS test;")
-        conn.commit()
-        self.assertEqual(check_query_data_active(cur, ["test"]), False)
+    # def test_check_query_data_active(self):
+    #     conn = connect_database()
+    #     cur = conn.cursor()
+    #     # create a test table in the database with the table format of a daily report
+    #     cur.execute("DROP TABLE IF EXISTS test;")
+    #     conn.commit()
+    #     self.assertEqual(check_query_data_active(cur, ["test"]), False)
 
     def test_check_request(self):
         result = check_request(['test'], {})
