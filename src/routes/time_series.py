@@ -134,19 +134,19 @@ def query_data():
                     location_str = "region = '{0}'".format(location['Country/Region']) \
                         if "Province/State" not in location else "region = '{0}' AND state = '{1}'" \
                         .format(location['Country/Region'], location['Province/State'])
-                    if type == "Confirmed" or type == "Active":
+                    if type.capitalize() == "Confirmed" or type == "Active":
                         confirmed_query = "SELECT sum(\"{0}\") FROM Confirmed WHERE ".format(date) + \
                                           location_str + " GROUP BY region, state;"
                         cur.execute(confirmed_query)
                         confirmed_record = cur.fetchone()
                         records['Confirmed'] = None if confirmed_record is None else confirmed_record[0]
-                    if type == "Deaths" or type == "Active":
+                    if type.capitalize() == "Deaths" or type == "Active":
                         deaths_query = "SELECT sum(\"{0}\") FROM Deaths WHERE ".format(date) + \
                                        location_str + " GROUP BY region, state;"
                         cur.execute(deaths_query)
                         deaths_record = cur.fetchone()
                         records['Deaths'] = None if deaths_record is None else deaths_record[0]
-                    if type == "Recovered" or type == "Active":
+                    if type.capitalize() == "Recovered" or type == "Active":
                         recovered_query = "SELECT sum(\"{0}\") FROM Deaths WHERE ".format(date) + \
                                           location_str + " GROUP BY region, state;"
                         cur.execute(recovered_query)
