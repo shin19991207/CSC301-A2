@@ -73,9 +73,9 @@ def time_series_return_csv(json_data, date_range, types):
 
 # check if the current data base contains all data (confirmed, recovered, deaths) needed to calculate active
 def check_query_data_active(cur, needed_types):
-    for type in needed_types:
+    for needed_type in needed_types:
         try:
-            cur.execute("SELECT * FROM {0};".format(type))
+            cur.execute("SELECT * FROM {0};".format(needed_type))
         except psycopg2.Error:
             return False
     return True

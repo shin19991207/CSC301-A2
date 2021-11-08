@@ -1,9 +1,10 @@
-# import sys
+import sys
 import unittest
+import psycopg2
 
-# sys.path.insert(0, '../src')
+sys.path.insert(0, '../src')
 
-from src.utils import *
+from src.utils import daily_reports_return_json, daily_reports_return_csv, time_series_return_csv, check_query_data_active, check_request
 from src.config import connect_database
 # import copy
 
