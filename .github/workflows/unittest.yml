@@ -1,0 +1,33 @@
+name: Unit and Integration Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+        
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Create env file
+      run: |
+        touch .env
+        echo PYTHON_ENV="production" >> .env
+        echo DATABASE_URL="postgres://zzhjpwzajydtqv:e8734600aed27084fdf27d7da6a35cac9c5f535eff528f2bcf15d20e12c49353@ec2-34-232-144-162.compute-1.amazonaws.com:5432/de2fn2uuvds3pf" >> .env
+        cat .env
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install -r requirements.txt
+        ls -la
+    - name: Test utils and routes
+      run: |
+        python3 -m unittest discover
