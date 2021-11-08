@@ -1,8 +1,7 @@
 venv
 .idea
-
 __pycache__/
 *.py[cod]
 *$py.class
-
 src/.env
+*.coverage

@@ -5,7 +5,6 @@ sys.path.insert(0, '../src')
 
 from utils import *
 from config import connect_database
-import psycopg2
 import copy
 
 
