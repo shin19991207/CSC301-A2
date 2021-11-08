@@ -19,12 +19,13 @@ def load_data():
     # check the format and type parameter
     if not request.content_type.startswith('text/csv'):
         return fail(400, "content type is not correct", "please check if your file is a csv file")
-    if request.headers.get('type') not in ['confirmed', 'deaths', 'recovered', 'active']:
+
+    table_name = request.args.get('type')
+    if table_name not in ['confirmed', 'deaths', 'recovered', 'active']:
         return fail(400, "content type is not correct", "type argument should be one of confirmed, active, "
                                                         "deaths, recovered.")
 
     # read in binary data (csv file)
-    table_name = request.headers.get('type')
     data_content = request.data.decode('utf-8')
     buffer = StringIO()
     buffer.write(data_content)
