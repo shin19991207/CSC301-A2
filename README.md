@@ -7,14 +7,27 @@
     * Process:
     * Reflection:
 
+
 * Morgan (driver), Yanling (navigator)
+
+  * **Challenge**: Query data
+    * Process:
+    * Reflection: 
+
   * **Challenge**: Writing unit test and debugging code functionality
-    * Process: I (Morgan) was a driver when writing the unit test and debugging the code functionality of our program. 
-    * Reflection: I enjoyed doing pair programming with my partner as it was more productive than if I was debugging alone.
+    * Process: I (Morgan) was a driver when writing the unit test and debugging the code functionality of our program. The debugging step is always a tough process in writing a program, since it is often the codes that you are confident with that cause the error. The pair programming process went quite well and faster the pace of debugging. When an error arose in our program or a feature did not work, the navigator (my parter) would ask me to explain my code line by line to her. Often, through the procedure of justifying each line of code and conveying my initial thought on doing these steps, I could find out what and where went wrong by myself, or my partner would point out the steps that she found unworkable.
+    * Reflection: I enjoyed doing pair programming with my partner as it was more productive than if I was debugging alone. Such a process helps me to find out what and where went wrong more efficiently, although it was sometimes hard to understand the changes navigator want me to make by just having her telling me the code or the functions and modules to use orally. 
 
 ## Program design
 
-* We use Heroku Postgres to store the uploaded data from user. Since there is an enforced row limits of 10,000 rows in our database, please be aware of the rows in each data file uploaded.
+### Design Decisions
+
+ * [X] explain the reasons why we allow only global data file format here.
+ * We use Heroku Postgres to store the uploaded data from user. Since there is an enforced row limits of 10,000 rows in our database, please be aware of the rows in each data file uploaded.
+ * We make decision on the maximum number of data files that can be saved to our program according to the limitations of our database used mentioned above. Since each global daily report contains approximately 5000 rows, we can allow at most and only one daily report to exist in or to be saved into our database. Each global time series data file contains approximately 300 rows, so we decided to allow at most 4 time series data to exist in or to be saved into our database, reserving one slot for each case type.
+
+### Design Patterns
+ * [X] mention some design patterns here
 
 
 ## Functionality
@@ -53,7 +66,7 @@
 
 ### Setup for Running on a Local Machine
 
-* Our program is compatible with and tested on Mac OS. If running locally, please note that the program might not be compatible with any other operating systems such as Ubuntu Linux since some required packages or packages version specified in `requirements.txt` is not supported on specific os.
+* Our program is compatible with and tested on Mac OS. If running locally, please note that the program might not be compatible with and is not guaranteed to be able to run on any other operating systems, including Ubuntu Linux, since some required packages or packages version specified in `requirements.txt` is not supported on specific os.
 * To ensure proper configuration while running on a local machine, ensure that you follow the following steps:
 
 1. `git clone https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207.git && cd assignment-2-61-yanling-h-shin19991207`
