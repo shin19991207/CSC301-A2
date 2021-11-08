@@ -2,9 +2,26 @@
 
 ## Pair Programming
 
+* Yanling (driver), Morgan (navigator)
+  * Challenge: 
+  * Reflection:
+
+* Morgan (driver), Yanling (navigator)
+  * Challenge: 
+  * Reflection:
+
 ## Program design
 
+
+
 ## Functionality
+
+* **Adding a new data file**: The user can upload a csv file to our API using the endpoints `/time_series/data?type={type}` for time series data and `/daily_reports/data` for daily_reports data.
+
+* **Update existing files**
+* **Query data**
+* **Support returning the data in multiple formats: json and csv**
+
 
 ## Instructions 
 
