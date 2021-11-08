@@ -10,22 +10,26 @@ from src.config import connect_database
 
 
 class TestUtils(unittest.TestCase):
+    def __init__(self, *args, **kwargs):
+        super(TestUtils, self).__init__(*args, **kwargs)
+        self.conn = connect_database()
+
     def test_daily_reports_return_json(self):
         try:
-            conn = connect_database()
-            cur = conn.cursor()
+            # conn = connect_database()
+            cur = self.conn.cursor()
             # create a test table in the database with the table format of a daily report
             cur.execute("DROP TABLE IF EXISTS test;")
-            conn.commit()
+            self.conn.commit()
             cur.execute("CREATE TABLE test (state VARCHAR(5), region VARCHAR(5), last_update VARCHAR(20), "
                         "confirmed INTEGER, deaths INTEGER, recovered INTEGER, active INTEGER, combined_key VARCHAR("
                         "5));")
-            conn.commit()
+            self.conn.commit()
             cur.execute("INSERT INTO test VALUES ('a', 'a', '2021-01-02 05:22:33', 10, 5, 0, 5, 'a, a'), "
                         "(null, 'b', '2021-01-02 05:22:33', 1, 0, 0, 1, 'b'), "
                         "('b', 'b', '2021-01-02 05:22:33', 4, 3, 0, 1, 'b, b');"
                         )
-            conn.commit()
+            self.conn.commit()
 
             date = "01/01/21"
             types = ["Confirmed", "Deaths", "Recovered", "Active"]
@@ -93,13 +97,13 @@ class TestUtils(unittest.TestCase):
         result = time_series_return_csv(json_data, ["01/26/20"], ["Confirmed"])
         self.assertEqual(result, expected)
 
-    # def test_check_query_data_active(self):
-    #     conn = connect_database()
-    #     cur = conn.cursor()
-    #     # create a test table in the database with the table format of a daily report
-    #     cur.execute("DROP TABLE IF EXISTS test;")
-    #     conn.commit()
-    #     self.assertEqual(check_query_data_active(cur, ["test"]), False)
+    def test_check_query_data_active(self):
+        # conn = connect_database()
+        cur = self.conn.cursor()
+        # create a test table in the database with the table format of a daily report
+        cur.execute("DROP TABLE IF EXISTS test;")
+        self.conn.commit()
+        self.assertEqual(check_query_data_active(cur, ["test"]), False)
 
     def test_check_request(self):
         result = check_request(['test'], {})
