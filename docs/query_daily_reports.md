@@ -6,6 +6,8 @@ Query data by countries, time period, and cases types to get the data of the COV
 
 **Method**: `POST`
 
+**Content-Type**: `application/json`
+
 **Required Body:**
 
 <table>
@@ -17,7 +19,6 @@ Query data by countries, time period, and cases types to get the data of the COV
 <td> non-empty string </td>
 <td> The date of the daily report in the format <code>mm/dd/yy</code>. <code>date</code> has to be the date of the most recent uploaded daily report data </td>
 <td> <code>"01/22/20"</code> </td>
-</tr>
 <tr>
 
 <td> types </td>
@@ -44,8 +45,8 @@ Query data by countries, time period, and cases types to get the data of the COV
   },
   { 
     "Country/Region": "Australia", 
-    "Province/State": "Queensland", 
-    "Combined_Key": "Queensland, Australia"
+    "Province/State": "Australian Capital Territory",
+    "Combined_Key": "Australian Capital Territory, Australia"
   }
 ]
 ```
@@ -70,11 +71,41 @@ Query data by countries, time period, and cases types to get the data of the COV
   * Content-Type: `application/json`
   * Returned data in json format
   ```json
+  {
+      "Date": "01/01/21",
+      "Reports": [
+          {
+              "Active": 628708,
+              "Confirmed": 648289,
+              "Country/Region": "Belgium",
+              "Deaths": 19581
+          },
+          {
+              "Active": 20154,
+              "Confirmed": 187344,
+              "Country/Region": "Canada",
+              "Deaths": 4568,
+              "Province/State": "Ontario"
+          },
+          {
+              "Active": 1,
+              "Combined_Key": "Australian Capital Territory, Australia",
+              "Confirmed": 118,
+              "Country/Region": "Australia",
+              "Deaths": 3,
+              "Province/State": "Australian Capital Territory"
+          }
+      ]
+  }
   ```
   
   * Content-Type: `text/csv`
   * Returned data in csv format
   ```
+  Date,Province/State,Country/Region,Combined_Key,Confirmed,Deaths,Active
+  01/01/21,,Belgium,,648289,19581,628708
+  01/01/21,Ontario,Canada,,187344,4568,20154
+  01/01/21,Australian Capital Territory,Australia,Australian Capital Territory, Australia,118,3,1
   ```
 
 **Error Response**
@@ -86,18 +117,6 @@ Query data by countries, time period, and cases types to get the data of the COV
     "code": 400, 
     "message": "No data for the given date", 
     "detail": "No daily report existed for the given date" 
-  }
-  ```
-
-OR
-
-* **Code**: `500 Internal Server Error`
-* **Content**: 
-  ```json
-  { 
-    "code": 500, 
-    "message": "Internal Server Error", 
-    "detail": "PlpgsqlError" 
   }
   ```
 

@@ -6,7 +6,9 @@ Query data by countries, time period, and cases types to get the data of the COV
 
 **Method**: `POST`
 
-**Required Parameters:**
+**Content-Type**: `application/json`
+
+**Required Body:**
 
 <table>
 <tr> 
@@ -143,18 +145,6 @@ Query data by countries, time period, and cases types to get the data of the COV
     "code": 400, 
     "message": "Wrong parameter value", 
     "detail": "Parameter return_type must be json or csv" 
-  }
-  ```
-
-OR
-
-* **Code**: `500 Internal Server Error`
-* **Content**: 
-  ```json
-  { 
-    "code": 500, 
-    "message": "Internal Server Error", 
-    "detail": "PlpgsqlError" 
   }
   ```
 
