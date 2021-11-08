@@ -1,4 +1,5 @@
 # Load Daily Reports Data
+
 Upload or update a daily reports formatted csv file data.
 
 ## Add data / Update data
@@ -9,27 +10,33 @@ Upload or update a daily reports formatted csv file data.
 
 **Required Body**:
 
-| Name | Type   | Description                                                  | Example                                                      |
-| -----| ------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Name | Type     | Description                                                  | Example             |
+| ---- | -------- | ------------------------------------------------------------ | ------------------- |
 | data | text/csv | The cvs file in the form of global daily reports files following the format specified [here](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports) | `"@01-01-2021.csv"` |
 
 **Success Response**:
 
 * **Code**: `200 OK`
-* **Content**: `{}`
+* **Content**: `{"message": "your file is successfully updated"}`
 
 
 **Error Response**:
 
 * **Code**: `400 Bad Request`
-* **Content**: `{}`
+* **Content**: 
 
-OR
+```json
+{
+ "code": 400,
+ "detail": "numbers of people should be integers",
+ "message": "the content of the upcoming file does not meet expectation"
+}
+```
 
-* **Code**: `500 Internal Server Error`
-* **Content**: `{}`
+
 
 **Sample Call**:
+
 ```
 $ curl -H "Content-Type: text/csv" \
   --data-binary "@01-01-2021.csv" \

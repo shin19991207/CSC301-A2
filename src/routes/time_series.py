@@ -89,7 +89,7 @@ def load_data():
     cur.close()
     conn.close()
     # print("date_column: ", acc_column, "\ndate_value: ", acc_value, "\nnum of rows", len(csv_file))
-    msg = jsonify({"message": "your file is successfully updated"})
+    msg = jsonify({"message": f"your file '{table_name}' is successfully updated"})
     return make_response(msg, 200)
 
 

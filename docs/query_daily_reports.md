@@ -6,6 +6,8 @@ Query data by countries, time period, and cases types to get the data of the COV
 
 **Method**: `POST`
 
+**Content-Type**: `application/json`
+
 **Required Body:**
 
 <table>
