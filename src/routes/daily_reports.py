@@ -4,8 +4,7 @@ from io import StringIO
 from datetime import datetime, timedelta
 import pandas as pd
 from config import connect_database
-from utils.daily_reports_util import return_json, return_csv
-from utils.util import fail, check_request
+from utils import *
 
 daily_reports = Blueprint('daily_reports', __name__)
 
@@ -113,14 +112,14 @@ def query_data():
                 (datetime.strptime(existed_daily_report[0], '%Y-%m-%d %X') - timedelta(days=1)).strftime('%m/%d/%y') \
                 != date:
             return fail(400, "No data for the given date", "No daily report existed for the given date")
-        json_data = return_json(cur, date, locations, types)
+        json_data = daily_reports_return_json(cur, date, locations, types, 'daily_reports')
         cur.close()
         conn.close()
         if data["return_type"] == "json":
             return_data = jsonify(json_data)
             content_type = "application/json"
         else:
-            return_data = return_csv(json_data, types)
+            return_data = daily_reports_return_csv(json_data, types)
             content_type = "text/csv"
         response = make_response(return_data, 200, )
         response.headers["Content-Type"] = content_type

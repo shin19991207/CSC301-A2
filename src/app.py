@@ -4,6 +4,7 @@ from flask import Flask
 from routes.daily_reports import daily_reports
 from routes.time_series import time_series
 
+
 app = Flask(__name__)
 
 app.register_blueprint(daily_reports, url_prefix='/daily_reports')
