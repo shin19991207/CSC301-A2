@@ -4,11 +4,13 @@
 
 * Yanling (driver), Morgan (navigator)
   * Challenge: 
-  * Reflection:
+    * Process:
+    * Reflection:
 
 * Morgan (driver), Yanling (navigator)
-  * Challenge: 
-  * Reflection:
+  * **Challenge**: Writing unit test and debugging code functionality
+    * Process: I (Morgan) was a driver when writing the unit test and debugging the code functionality of our program. 
+    * Reflection: I enjoyed doing pair programming with my partner as it was more productive than if I was debugging alone.
 
 ## Program design
 
