@@ -4,7 +4,7 @@ Upload or update a time series formatted csv file data.
 
 ## Add data / Update data
 
-**URL**: `/time_series/data`
+**URL**: `/time_series/data?type={type}`
 
 **Method**: `POST`
 
@@ -14,11 +14,11 @@ Upload or update a time series formatted csv file data.
 | ---- | -------- | ------------------------------------------------------------ | --------------------------------------------- |
 | data | text/csv | The cvs file in the form of global time series files following the format specified [here](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series) | `"@time_series_covid19_confirmed_global.csv"` |
 
-**Required Headers**:
+**Required Param**:
 
 | Name | Type    | Description                                                  | Example     |
 | ---- | ------- | ------------------------------------------------------------ | ----------- |
-| type | headers | The cases type of the provided time series file. It should be one of: `confirmed`, `deaths`, `recovered` or  `active` | `confirmed` |
+| type | param | The cases type of the provided time series file. It should be one of: `confirmed`, `deaths`, `recovered` or  `active` | `confirmed` |
 
 **Success Response**:
 
@@ -63,7 +63,6 @@ Upload or update a time series formatted csv file data.
 
 ```
 $ curl -H "Content-Type: text/csv" \
-  -H "type: Confirmed" \
   --data-binary "@time_series_covid19_confirmed_global.csv" \
-  -X POST https://covid-monitor-61.herokuapp.com/time_series/data
+  -X POST https://covid-monitor-61.herokuapp.com/time_series/data?type=confirmed
 ```
