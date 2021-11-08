@@ -2,16 +2,14 @@ from unittest import TestCase
 import unittest
 import requests
 
-import sys
-
-sys.path.insert(0, '../../src')
-from app import app
-from app import app
+# import sys
+#
+# sys.path.insert(0, '../../src')
 
 
 class TestLoadTimeSeries(TestCase):
     def test_load_data_success(self):
-        f = open("./time_series_covid19_recovered_global.csv", "rb")
+        f = open("tests/routes/time_series_covid19_recovered_global.csv", "rb")
         file = f.read()
         url = 'https://covid-monitor-61.herokuapp.com/time_series/data?type=recovered'
         r = requests.post(url, data=file, headers={"Content-Type": "text/csv"})

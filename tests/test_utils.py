@@ -1,10 +1,10 @@
 import sys
 import unittest
 
-sys.path.insert(0, '../src')
+# sys.path.insert(0, '../src')
 
-from utils import *
-from config import connect_database
+from src.utils import *
+from src.config import connect_database
 import copy
 
 

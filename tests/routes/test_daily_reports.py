@@ -5,11 +5,10 @@ import csv
 from flask import request, jsonify
 import requests
 
-import sys
+# import sys
+#
+# sys.path.insert(0, '../../src')
 
-sys.path.insert(0, '../../src')
-from app import app
-from app import app
 
 
 class TestLoadDailyReports(TestCase):
@@ -17,7 +16,7 @@ class TestLoadDailyReports(TestCase):
     #     self.app = app.
 
     def test_load_data_success(self):
-        f = open("./01-01-2021.csv", "rb")
+        f = open("tests/routes/01-01-2021.csv", "rb")
         file = f.read()
         url = 'https://covid-monitor-61.herokuapp.com/daily_reports/data'
         r = requests.post(url, data=file, headers={"Content-Type": "text/csv"})
