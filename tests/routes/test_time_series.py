@@ -14,7 +14,6 @@ class TestLoadTimeSeries(TestCase):
         url = 'https://covid-monitor-61.herokuapp.com/time_series/data?type=recovered'
         r = requests.post(url, data=file, headers={"Content-Type": "text/csv"})
         f.close()
-        print(r)
         self.assertEqual(r.status_code, 200)
 
     def test_query_data(self):
