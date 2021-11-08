@@ -19,13 +19,13 @@ class TestLoadDailyReports(TestCase):
     def test_load_data_success(self):
         f = open("./01-01-2021.csv", "rb")
         file = f.read()
-        url = 'http://127.0.0.1:5000/daily_reports/data'
+        url = 'https://covid-monitor-61.herokuapp.com/daily_reports/data'
         r = requests.post(url, data=file, headers={"Content-Type": "text/csv"})
         f.close()
         self.assertEqual(r.status_code, 200)
 
     def test_query_data_success(self):
-        url = 'http://127.0.0.1:5000/daily_reports/cases'
+        url = 'https://covid-monitor-61.herokuapp.com/daily_reports/cases'
         body = {"return_type": "json",
                 "date": "01/01/21",
                 "types": ["Confirmed"],
