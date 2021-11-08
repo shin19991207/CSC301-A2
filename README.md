@@ -14,7 +14,7 @@
 
 To ensure proper configuration while running on a local machine, ensure that you follow the following steps:
 
-1. A .env file is required for environment variables and requires the following variables to be defined. Note that this file must be placed in the src root directory  `backend/.env`
+1. A `.env` file is required for environment variables and requires the following variables to be defined. Note that this file must be placed in the src root directory as `.env`
 
   ```
   DB_NAME=<database name>
