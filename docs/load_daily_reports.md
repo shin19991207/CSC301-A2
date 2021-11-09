@@ -12,7 +12,7 @@ Upload or update a daily reports formatted csv file data.
 
 | Name | Type     | Description                                                  | Example             |
 | ---- | -------- | ------------------------------------------------------------ | ------------------- |
-| data | text/csv | The cvs file in the form of global daily reports files following the format specified [here](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports) | `"@01-01-2021.csv"` |
+| data | text/csv | 1. The format of the file: the format follows the "times series" file specified [here](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series). <br/><br/> **IMPORTANT NOTICE**: we only accept the file in the format of global time_series such as [files with titles end with global in the repo](https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv) instead of [files with titles end with US](https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv)<br/><br/> | `"@01-01-2021.csv"` |
 
 **Success Response**:
 
