@@ -1,5 +1,3 @@
-# Query Daily Reports Data
-
 Query data by countries, time period, and cases types to get the data of the COVID cases type specified.
 
 **URL**: `/daily_reports/cases`
