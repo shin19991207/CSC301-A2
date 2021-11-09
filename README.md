@@ -21,8 +21,8 @@
 ## Program design
 
 ### Design Decisions
-
- * [X] explain the reasons why we allow only global data file format here.
+ 
+ * We supports only files of **global** data to be added or uploaded to our program. Since our program checks if a file is in the correct format when the user tries to upload a data file, we need the uploaded files to be in a consistent format. Since the global and US data files are formatted differently, we choose to support only data files in the **global** data format.
  * We use Heroku Postgres to store the uploaded data from user. Since there is an enforced row limits of 10,000 rows in our database, please be aware of the rows in each data file uploaded.
  * We make decision on the maximum number of data files that can be saved to our program according to the limitations of our database used mentioned above. Since each global daily report contains approximately 5000 rows, we can allow at most and only one daily report to exist in or to be saved into our database. Each global time series data file contains approximately 300 rows, so we decided to allow at most 4 time series data to exist in or to be saved into our database, reserving one slot for each case type.
 
@@ -87,6 +87,8 @@
 ### Accessing the API Online
 
 The API is deployed to https://covid-monitor-61.herokuapp.com/ and calls can be made according to the [REST-API-Documentation](#rest-api-documentation).
+
+### Recommeded Steps for Using the API
 
 
 ## Tests
