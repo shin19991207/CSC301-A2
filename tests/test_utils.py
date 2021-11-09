@@ -60,9 +60,8 @@ class TestUtils(unittest.TestCase):
                 ]
             }
             self.assertEqual(result, expected)
-
         except psycopg2.Error:
-            pass
+            assert False, "Database Error"
 
     def test_daily_reports_return_csv(self):
         json_data = {
@@ -98,12 +97,15 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_check_query_data_active(self):
-        # conn = connect_database()
-        cur = self.conn.cursor()
-        # create a test table in the database with the table format of a daily report
-        cur.execute("DROP TABLE IF EXISTS test;")
-        self.conn.commit()
-        self.assertEqual(check_query_data_active(cur, ["test"]), False)
+        try:
+            # conn = connect_database()
+            cur = self.conn.cursor()
+            # create a test table in the database with the table format of a daily report
+            cur.execute("DROP TABLE IF EXISTS test;")
+            self.conn.commit()
+            self.assertEqual(check_query_data_active(cur, ["test"]), False)
+        except psycopg2.Error:
+            assert False, "Database Error"
 
     def test_check_request(self):
         result = check_request(['test'], {})
