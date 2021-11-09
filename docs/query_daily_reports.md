@@ -1,4 +1,10 @@
+### API description
+
 Query data by countries, time period, and cases types to get the data of the COVID cases type specified.
+
+**IMPORTANT NOTICE**:
+
+Due to the limitation of database storage, we will not storing the file uploaded before and thus, if you want to query on a csv file, you need to upload it first.
 
 **URL**: `/daily_reports/cases`
 

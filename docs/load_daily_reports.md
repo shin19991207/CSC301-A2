@@ -1,14 +1,10 @@
-#### API description
+### API description
 
 Upload or update a daily reports formatted csv file data.
 
 
 
 **The format of the file to upload/update:** the format follows the "daily_reoports" file specified [here](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports)
-
-**IMPORTANT NOTICE**:
-
-Due to the limitation of database storage, we will not storing the file uploaded before and thus, if you want to query on a csv file, you need to upload it first.
 
 
 
@@ -19,8 +15,6 @@ Due to the limitation of database storage, we will not storing the file uploaded
  (Step 2) Navigate to the folder containing the csv file in your terminal
 
  (Step 3) Pass request body by specifying the relative path of the file to the folder running the request command. ie:`@[file name]`
-
-
 
 For example, if you download the csv file to the **Desktop folder** in your computer, then you only need to pass `@01-01-2021.csv` as a request body when running the request commend in the terminal navigated to the **Desktop folder**
 
