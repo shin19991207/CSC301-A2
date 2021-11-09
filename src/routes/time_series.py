@@ -21,7 +21,7 @@ def load_data():
         return fail(400, "content type is not correct", "please check if your file is a csv file")
 
     table_name = request.args.get('type')
-    if table_name not in ['confirmed', 'deaths', 'recovered', 'active']:
+    if table_name not in ['confirmed', 'deaths', 'recovered']:
         return fail(400, "content type is not correct", "type argument should be one of confirmed, active, "
                                                         "deaths, recovered.")
 
@@ -53,7 +53,7 @@ def load_data():
     # check if the numbers of people in the column are integers
     types = csv_file.iloc[:, 4:].dtypes
     for index, value in types.items():
-        if value != "int64":
+        if value != "int64" or "float64":
             return fail(400, "the content of the upcoming file does not meet expectation",
                         "numbers of people should be integers")
 
