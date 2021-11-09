@@ -85,8 +85,7 @@ def load_data():
 def query_data():
     data = request.get_json()
 
-    required_parameters = ["return_type", "date", "types", "locations"]
-    missing_required = check_request(required_parameters, data)
+    missing_required = check_request(["return_type", "types", "locations"], data)
     if missing_required[0] != "" or missing_required[1] != "":
         return fail(400, "Missing required parameter(s)",
                     "Missing required parameter(s): " + missing_required[0] +
