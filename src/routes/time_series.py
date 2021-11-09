@@ -53,7 +53,7 @@ def load_data():
     # check if the numbers of people in the column are integers
     types = csv_file.iloc[:, 4:].dtypes
     for index, value in types.items():
-        if value != "int64" or "float64":
+        if not (value == "int64" or value == "float64"):
             return fail(400, "the content of the upcoming file does not meet expectation",
                         "numbers of people should be integers")
 
