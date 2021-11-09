@@ -3,8 +3,13 @@
 ## Pair Programming
 
 * Yanling (driver), Morgan (navigator)
-  * Challenge: 
-    * Process:
+  * **Feature**: Design inputs and outputs of the API 
+    * Process: Yanling worked as a driver when writing the rough draft of API documentation. Yanling and Morgan discussed together to figure out inputs that are necessery to meet the required functionalities and also optional inputs that are not essential but enable user to customize the output of the API. 
+    * Challenge:
+    * Reflection:
+  * **Feature**: Load csv file to relational PostgreSQL database
+    * Process: Yanling and Morgan search around the postman and read posts in Piazza to find out a way to send data through post requests and then load data from requests to PostgreSQL database. After a series of trial, we reach an agreement and Morgan as a driver read in file from users' requests and then the role is switch and Yanling is then driver to load data to the postgreSQL.
+    * Challenge:
     * Reflection:
 
 
@@ -21,7 +26,7 @@
 ## Program design
 
 ### Design Decisions
- 
+
  * We supports only files of **global** data to be added or uploaded to our program. Since our program checks if a file is in the correct format when the user tries to upload a data file, we need the uploaded files to be in a consistent format. Since the global and US data files are formatted differently, we choose to support only data files in the **global** data format.
  * We use Heroku Postgres to store the uploaded data from user. Since there is an enforced row limits of 10,000 rows in our database, please be aware of the rows in each data file uploaded.
  * We make decision on the maximum number of data files that can be saved to our program according to the limitations of our database used mentioned above. Since each global daily report contains approximately 5000 rows, we can allow at most and only one daily report to exist in or to be saved into our database. Each global time series data file contains approximately 300 rows, so we decided to allow at most 4 time series data to exist in or to be saved into our database, reserving one slot for each case type.
@@ -40,7 +45,7 @@
     
   * Daily Reports Data (`/daily_reports/data`):
     * The file format should be consistent and follows the format of the **global** daily reports specified [here](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports). Note that files formatted as US daily reports are not accepted and will cause an error response with code 400.
-    
+  
 * **Update existing files**: The url endpoint is as same as the one for adding a new data file.
 
   * Time Series Data (`/time_series/data?type={type}`):
@@ -77,7 +82,7 @@
   DB_NAME=<database name>
   DB_USER=<username for accessing database>
   ```
-  
+
  3. Create a virtualenv named `venv` using `$ python3 -m venv venv`
  4. Activate the virtualenv using `$ source venv/bin/activate`
  5. Install the required libraries from `pip` using `$ pip3 install -r requirements.txt`
