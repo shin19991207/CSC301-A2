@@ -15,12 +15,6 @@ Query data by countries, time period, and cases types to get the data of the COV
 <td> Name </td> <td> Type </td> <td> Description </td> <td> Example </td>
 </tr>
 
-<td> date </td>
-<td> non-empty string </td>
-<td> The date of the daily report in the format <code>mm/dd/yy</code>. <code>date</code> has to be the date of the most recent uploaded daily report data </td>
-<td> <code>"01/22/20"</code> </td>
-<tr>
-
 <td> types </td>
 <td> non-emtpy array </td>
 <td> An array with the following string as options:  <code>"Confirmed"</code>,  <code>"Deaths"</code>,  <code>"Recovered"</code>,  <code>"Active"</code> </td>
@@ -124,7 +118,6 @@ Query data by countries, time period, and cases types to get the data of the COV
 **Sample Call**:
 ```
 $ curl -d '{ "return_type" : "json",  
-             "date": "01/01/21",
              "types": [ "Confirmed", "Deaths", "Active" ],
              "locations":
              [
