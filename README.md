@@ -89,6 +89,12 @@
 The API is deployed to https://covid-monitor-61.herokuapp.com/ and calls can be made according to the [REST-API-Documentation](#rest-api-documentation).
 
 ### Recommeded Steps for Using the API
+Follow the recommeded steps for using the API to prevent from error responds.
+
+* **Time Series**
+ 1. Upload global time series data from endpoint `/time_series/data?type={type}`
+
+* **Daily Reports**
 
 
 ## Tests
