@@ -37,7 +37,6 @@ class TestLoadDailyReports(TestCase):
                     ]
                 }
         r = requests.post(url, json=body, headers={"Content-Type": "application/json"})
-        print(r.json())
         self.assertEqual(r.status_code, 200)
 
 
