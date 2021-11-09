@@ -37,7 +37,6 @@
 ## Functionality
 
 * **Adding a new data file**: The user can upload a csv file to our API using the endpoints `/time_series/data?type={type}` for time series data and `/daily_reports/data` for daily_reports data. Only one file can be sent at a time and the uploading time takes about 10 seconds.
-
   * Time Series Data (`/time_series/data?type={type}`):
     * The file format should be consistent and follows the format of `time_series_covid19_{type}_global.csv` specified [here](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series). Note that our program only accepts the format of **global** time series data, that is, any files with the format of `time_series_covid19_{type}_US.csv` will not be accepted and will cause an error response with code 400.
     * `type` param in the url endpoint should be one of `confirmed`, `deaths`, `recovered`, or `active`.
