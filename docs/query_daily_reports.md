@@ -129,10 +129,10 @@ $ curl --location --request POST 'https://covid-monitor-61.herokuapp.com/daily_r
                 [
                   { "Country/Region": "Belgium" },
                   { "Country/Region": "Canada", 
-                    "Province/State": "Ontario"},
+                    "Province/State": "Ontario" },
                   { "Country/Region": "Australia", 
                     "Province/State": "Queensland", 
-                    "Combined_Key": "Australian Capital Territory, Australia"}
+                    "Combined_Key": "Australian Capital Territory, Australia" }
                 ]
               }'
 ```
