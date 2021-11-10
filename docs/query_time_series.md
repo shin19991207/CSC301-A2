@@ -154,17 +154,19 @@ Due to the limitation of database storage, we will not storing the file uploaded
 
 **Sample Call**:
 ```
-$ curl -d '{ "return_type" : "json",
-             "start_date": "02/21/20",
-             "end_date": "2/26/20",
-             "types": ["Confirmed"],
-             "locations":
-                [ {"Country/Region": "Albania"},  
-                  {"Country/Region": "Canada", "Province/State": "Ontario"},
-                  {"Country/Region": "Australia"}
+$ curl --location --request POST 'https://covid-monitor-61.herokuapp.com/time_series/cases' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{ "return_type" : "json",
+                "start_date": "01/26/20",
+                "end_date": "01/28/20",
+                "types": ["Confirmed"],
+                "locations":
+                [
+                  { "Country/Region": "Albania" },
+                  { "Country/Region": "Canada", 
+                    "Province/State": "Ontario" },
+                  { "Country/Region": "Australia" }
                 ]
-           }' 
-        -H "Content-Type: application/json" 
-        -X POST https://covid-monitor-61.herokuapp.com/time_series/cases
+              }'
 ```
 
