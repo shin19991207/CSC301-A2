@@ -23,8 +23,7 @@ def load_data():
     table_name = request.args.get('type')
     if table_name not in ['confirmed', 'deaths', 'recovered']:
         print(table_name)
-        return fail(400, "content type is not correct", "type argument should be one of confirmed, "
-                                                        "deaths, recovered.")
+        return fail(400, "Param type is not correct", "type param should be one of confirmed, deaths, or recovered.")
 
     # read in binary data (csv file)
     data_content = request.data.decode('utf-8')
@@ -54,7 +53,7 @@ def load_data():
     # check if the numbers of people in the column are integers
     types = csv_file.iloc[:, 4:].dtypes
     for index, value in types.items():
-        if value != "int64":
+        if not (value == "int64" or value == "float64"):
             return fail(400, "the content of the upcoming file does not meet expectation",
                         "numbers of people should be integers")
 
@@ -91,7 +90,7 @@ def load_data():
     cur.close()
     conn.close()
     # print("date_column: ", acc_column, "\ndate_value: ", acc_value, "\nnum of rows", len(csv_file))
-    msg = jsonify({"message": f"your file '{table_name}' is successfully updated"})
+    msg = jsonify({"message": f"your file '{table_name}' is successfully loaded/updated"})
     return make_response(msg, 200)
 
 

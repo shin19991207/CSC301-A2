@@ -77,7 +77,7 @@ def load_data():
                     "the number of rows in the table is different from the number of rows in the upcoming file")
     cur.close()
     conn.close()
-    msg = jsonify({"message": "your file 'daily_reports' is successfully updated"})
+    msg = jsonify({"message": "your file 'daily_reports' is successfully loaded/updated"})
     return make_response(msg, 200)
 
 

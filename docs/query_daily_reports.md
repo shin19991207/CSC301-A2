@@ -1,6 +1,10 @@
-# Query Daily Reports Data
+### API description
 
 Query data by countries, time period, and cases types to get the data of the COVID cases type specified.
+
+**IMPORTANT NOTICE**:
+
+Due to the limitation of database storage, we will not storing the file uploaded before and thus, if you want to query on a csv file, you need to upload it first.
 
 **URL**: `/daily_reports/cases`
 
@@ -117,18 +121,19 @@ Query data by countries, time period, and cases types to get the data of the COV
 
 **Sample Call**:
 ```
-$ curl -d '{ "return_type" : "json",  
-             "types": [ "Confirmed", "Deaths", "Active" ],
-             "locations":
-             [
-              { "Country/Region": "Belgium" },
-              { "Country/Region": "Canada", "Province/State": "Ontario"},
-              { "Country/Region": "Australia", 
-                "Province/State": "Queensland", 
-                "Combined_Key": "Australian Capital Territory, Australia"}
-             ]
-           }' 
-        -H "Content-Type: application/json" 
-        -X POST https://covid-monitor-61.herokuapp.com/time_series/cases
+$ curl --location --request POST 'https://covid-monitor-61.herokuapp.com/daily_reports/cases' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{ "return_type" : "json",  
+                "types": [ "Confirmed", "Deaths", "Active" ],
+                "locations":
+                [
+                  { "Country/Region": "Belgium" },
+                  { "Country/Region": "Canada", 
+                    "Province/State": "Ontario" },
+                  { "Country/Region": "Australia", 
+                    "Province/State": "Queensland", 
+                    "Combined_Key": "Australian Capital Territory, Australia" }
+                ]
+              }'
 ```
 
