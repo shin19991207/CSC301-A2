@@ -26,17 +26,34 @@
 
 ### Design Decisions
 
- * We supports only files of **global** data to be added or uploaded to our program. Since our program checks if a file is in the correct format when the user tries to upload a data file, we need the uploaded files to be in a consistent format. Since the global and US data files are formatted differently, we choose to support only data files in the **global** data format.
- * We use Heroku Postgres to store the uploaded data from user. Since there is an enforced row limits of 10,000 rows in our database, please be aware of the rows in each data file uploaded.
- * We make decision on the maximum number of data files that can be saved to our program according to the limitations of our database used mentioned above. Since each global daily report contains approximately 5000 rows, we can allow at most and only one daily report to exist in or to be saved into our database. Each global time series data file contains approximately 300 rows, so we decided to allow at most 4 time series data to exist in or to be saved into our database, reserving one slot for each case type.
+ * We supports only files of **global** data to be added or uploaded to our program. The global data are those csv files ended with "global" such as `time_series_covid19_confirmed_global.csv` Since our program checks if a file is in the correct format when the user tries to upload a data file, we need the uploaded files to be in a consistent format. Since the global and US data files are formatted differently, we choose to support only data files in the **global** data format.
+ * We use Heroku Postgres to store the uploaded data from user. Since there is an enforced row limits of 10,000 rows in our database, we make decision on the maximum number of data files that can be saved to our program according to the limitations of our database used mentioned above. Since each global daily report contains approximately 5000 rows, we can allow at most one daily report to exist in or to be saved into our database. Even though each global time series data file contains approximately 300 rows, and thus at most 4 time series data can be saved into our database. However, since we can't stop user from requesting and the database might be full after several requests. Then users might not able to load any more data to the database, which results in a "dead" API. We could delete old data when the database is about to be full by counting the number of rows added to the database. However, we think that this design is not user friendly. Firstly, users are not informed explicitly which old files are deleted, and thus they might upload data each time before they do queries to avoid potential errors. Also, we think that if our API requires users to load old files sometimes and do not require them to upload old files in another cases, it is confusing for users. **To reduce the inconsistency cross requests, we decide to make users to upload data each time before querying on them and once they upload a file in the same format, the old file in the same format will be deleted**.
+
+### Relationships between objects
+
+We didn't create objects in our program explicitly but we create two endpoints which encapsulate data well. To be specific, our code has **high cohesion and loose coupling**. Since we are dealing with two disctinct formatted data, we query data in and only in the endpoint that loading the given. Then query methods only manipulate data loaded in the same endpoints, which fulfil single responsibility principle. 
 
 ### Design Patterns
- * [X] mention some design patterns here
+
+- Iterator
+
+By treating each row in csv files as objects, we used for loops to access each object without exposing its underlying representation. The f**or loop implicitly define iterator objects** for us.
+
+- Modular pattern
+
+We divide methods dealing with two distinct formatted data in two modules. Then our code become **more extendable**, since if we want to upload or do query on another new formatted data, we don't need to modify any line in the old modules. Also, our code is **easy to maintain** as if in the future, we are not responsible for one format of data anymore, we can simply delete the module reponsible for loading and querying on the format of data, which won't affect any methods to load or query on another format of data.
+
+- Open/Closed principle pattern
+
+The pattern says that code should be open for extension and closed for modification. Since we seperate methods into two based on the format of data dealing with. Then add new format of data or deleting old format of data won't affect any code in the existing module which means our code is**close for modification but open for extension**
+
+
 
 
 ## Functionality
 
 * **Adding a new data file**: The user can upload a csv file to our API using the endpoints `/time_series/data?type={type}` for time series data and `/daily_reports/data` for daily_reports data. Only one file can be sent at a time and the uploading time takes about 10 seconds.
+
   * Time Series Data (`/time_series/data?type={type}`):
     * The file format should be consistent and follows the format of `time_series_covid19_{type}_global.csv` specified [here](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series). Note that our program only accepts the format of **global** time series data, that is, any files with the format of `time_series_covid19_{type}_US.csv` will not be accepted and will cause an error response with code 400.
     * `type` param in the url endpoint should be one of `confirmed`, `deaths`, `recovered`, or `active`.
@@ -92,12 +109,12 @@
 The API is deployed to https://covid-monitor-61.herokuapp.com/ and calls can be made according to the [REST-API-Documentation](#rest-api-documentation).
 
 ### Recommeded Steps for Using the API
-Follow the recommeded steps for using the API to prevent from error responds.
 
-* **Time Series**
- 1. Upload global time series data from endpoint `/time_series/data?type={type}`
+Step1: Please check our [API docuementation](https://documenter.getpostman.com/view/16848767/UVC5DmxK#6fc4c4d6-ec60-4a50-ba71-245ed8883f64)
 
-* **Daily Reports**
+Step2: 
+
+- [ ] Add some screenshots
 
 
 ## Tests
@@ -146,4 +163,8 @@ Follow the recommeded steps for using the API to prevent from error responds.
 * [Query Time Series Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/query_time_series.md)
 * [Load Daily Reports Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/load_daily_reports.md)
 * [Query Daily Reports Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/query_daily_reports.md)
+
+
+
+
 
