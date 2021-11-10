@@ -6,21 +6,20 @@
   * **Feature**: Design inputs and outputs of the API 
     * Yanling worked as a driver when writing the rough draft of the API documentation, but we discussed together to figure out inputs that are necessery to meet the required functionalities and also optional inputs that are not essential but enable users to customize the output of the API. 
     * Even though the description of main functionalities are given but there are still a lot of flexibilities in the implementation. The file can be uploaded in several ways through the requests and the design of the endpoints are required as we need to handle two distinct types of tiles. Besides, even though the sample inputs are given, we need to descide which set of inputs are necessary and which are not so essential. Also, some features can be implemented multiple ways. For example, if users give a start_date and end_date, we can either return users the total number of people they are interested in or return a list of numbers wherer one value corresponds to information on one day. 
-    * I (Yanling) enjoy discussing with my partner to figure out the users' needs and detailed implementations, since a clear understanding of users' needs and the process of thinking detailed implemetation make us to implemente the features efficiently without changing back and forth due to bad understanding of the project requirements. Also, we can divide the tasks easily and then finish the assignment faster.
+    * **Reflection**: I (Yanling) enjoy discussing with my partner to figure out the users' needs and detailed implementations, since a clear understanding of users' needs and the process of thinking detailed implemetation make us to implemente the features efficiently without changing back and forth due to bad understanding of the project requirements. Also, we can divide the tasks easily and then finish the assignment faster.
   * **Feature**: Load csv file to relational PostgreSQL database
     * Yanling and Morgan search around the postman and read posts in Piazza to find out a way to send data through post requests and then load data from requests to PostgreSQL database. After a series of trials, we reach an agreement and Morgan as a driver wrote codes to read in file from users' requests and then the role is switched and Yanling is then driver to load data to the postgreSQL, whereas Morgan as a navigator is ready to discuss any error encounter when loading the database
     * Our largest challenge is that the relational database like postgreSQL restrict hard on data to load and thus when the column titles and values contain special characters such as single quote, black slash and comma, we fail to load data to database and thus clearful handling is needed.
-    * I (Yanling) like this part of the pair programming since having someone to discuss makes the debugging tolerable and more efficient. It is commons that I made a tiny mistake which results in a failure to load database. Usually, we found the error either immediately or  within several minutes of discussing and if the problem is so hard that we can't solve immediately, we searched around symotaneously and often it speeds up our debugging process.
+    * **Reflection**: I (Yanling) like this part of the pair programming since having someone to discuss makes the debugging tolerable and more efficient. It is commons that I made a tiny mistake which results in a failure to load database. Usually, we found the error either immediately or  within several minutes of discussing and if the problem is so hard that we can't solve immediately, we searched around symotaneously and often it speeds up our debugging process.
 
 
 * Morgan (driver), Yanling (navigator)
 
   * **Feature**: Query data
     * 
-  * **Feature**:  Writing unit tests
-    * I (Morgan) was a driver when writing the unit test and debugging the code functionality of our program. The debugging step is always a tough process in writing a program, since it is often the codes that you are confident with that cause the error. The pair programming process went quite well and faster the pace of debugging. When an error arose in our program or a feature did not work, the navigator (my parter) would ask me to explain my code line by line to her. Often, through the procedure of justifying each line of code and conveying my initial thought on doing these steps, I could find out what and where went wrong by myself, or my partner would point out the steps that she found unworkable.
-    * **Challenge**: Writing unit test and debugging code functionality
-    * Reflection: I enjoyed doing pair programming with my partner as it was more productive than if I was debugging alone. Such a process helps me to find out what and where went wrong more efficiently, although it was sometimes hard to understand the changes navigator want me to make by just having her telling me the code or the functions and modules to use orally. 
+  * **Feature**:  Writing unit test and debugging code functionality
+    * I (Morgan) was a driver when writing the unit test and debugging the code functionality of our program. The debugging step is always a tough process in writing a program, since it is often the codes that you are confident with that cause the error. The pair programming process went quite well and faster the pace of debugging. When an error arose in our program or a feature did not work, the navigator (Yanling) would ask me to explain the code line by line to her. Often, through the procedure of justifying each line of code and conveying my initial thought on doing these steps, I could find out what and where went wrong by myself, or my partner would point out the steps that she found unworkable.
+    * **Reflection**: I enjoyed doing pair programming with my partner as it was more productive than if I was debugging alone. Such a process helps me to find out what and where went wrong more efficiently, although it was sometimes hard to understand the changes navigator want me to make by just having her telling me the code or the functions and modules to use orally. 
 
 ## Program design
 
@@ -156,6 +155,9 @@ Step2:
 
 
 ## REST API Documentation
+
+* Calls to the API can be made according to the REST API documentation through the links for each endpoint below. 
+* Example calls to each endpoint can be accessed through [our published Postman documentation](https://documenter.getpostman.com/view/16848767/UVC5DmxK). Click the `Run in Postman` button on the upper right corner to import the collection and environment into your own workspace. Note that you will have to replace the uploaded file located in Body binary for each `Upload/Update Data` endpoint with a file on your own computer that follows the accepted format specified.
 
 ### Endpoints
 

@@ -54,7 +54,7 @@ For example, if you download the csv file to the **Desktop folder** in your comp
 **Sample Call**:
 
 ```
-$ curl -H "Content-Type: text/csv" \
-  --data-binary "@01-01-2021.csv" \
-  -X POST https://covid-monitor-61.herokuapp.com/daily_reports/data
+$ curl --location --request POST 'https://covid-monitor-61.herokuapp.com/daily_reports/data' \
+  --header 'Content-Type: text/csv' \
+  --data-binary '@01-01-2021.csv'
 ```
