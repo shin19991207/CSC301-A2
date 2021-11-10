@@ -140,6 +140,9 @@ Follow the recommeded steps for using the API to prevent from error responds.
 
 ## REST API Documentation
 
+* Calls to the API can be made according to the REST API documentation through the links for each endpoint below. 
+* Example calls to each endpoint can be accessed through [our published Postman documentation](https://documenter.getpostman.com/view/16848767/UVC5DmxK). Click the `Run in Postman` button on the upper right corner to import the collection and environment into your own workspace. Note that you will have to replace the uploaded file for each `Upload/Update Data` endpoint with a file on your own computer.
+
 ### Endpoints
 
 * [Load Time Series Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/load_daily_reports.md)
