@@ -32,17 +32,17 @@ We didn't create objects in our program explicitly but we create two endpoints w
 
 ### Design Patterns
 
-- Iterator
+* Iterator
 
-By treating each row in csv files as objects, we used for loops to access each object without exposing its underlying representation. The f**or loop implicitly define iterator objects** for us.
+  By treating each row in csv files as objects, we used for loops to access each object without exposing its underlying representation. The f**or loop implicitly define iterator objects** for us.
 
-- Modular pattern
+* Modular pattern
 
-We divide methods dealing with two distinct formatted data in two modules. Then our code become **more extendable**, since if we want to upload or do query on another new formatted data, we don't need to modify any line in the old modules. Also, our code is **easy to maintain** as if in the future, we are not responsible for one format of data anymore, we can simply delete the module reponsible for loading and querying on the format of data, which won't affect any methods to load or query on another format of data.
+  We divide methods dealing with two distinct formatted data in two modules. Then our code become **more extendable**, since if we want to upload or do query on another new formatted data, we don't need to modify any line in the old modules. Also, our code is **easy to maintain** as if in the future, we are not responsible for one format of data anymore, we can simply delete the module reponsible for loading and querying on the format of data, which won't affect any methods to load or query on another format of data.
 
-- Open/Closed principle pattern
+* Open/Closed principle pattern
 
-The pattern says that code should be open for extension and closed for modification. Since we seperate methods into two based on the format of data dealing with. Then add new format of data or deleting old format of data won't affect any code in the existing module which means our code is**close for modification but open for extension**
+  The pattern says that code should be open for extension and closed for modification. Since we seperate methods into two based on the format of data dealing with. Then add new format of data or deleting old format of data won't affect any code in the existing module which means our code is**close for modification but open for extension**
 
 
 
@@ -150,7 +150,7 @@ The API is deployed to https://covid-monitor-61.herokuapp.com/ and calls can be 
 
 ### Endpoints
 
-* [Load Time Series Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/load_daily_reports.md)
+* [Load Time Series Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/load_time_series.md)
 * [Query Time Series Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/query_time_series.md)
 * [Load Daily Reports Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/load_daily_reports.md)
 * [Query Daily Reports Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/query_daily_reports.md)
