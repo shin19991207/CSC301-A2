@@ -79,8 +79,8 @@ For example, if you download the file to the **Desktop folder** in your computer
 **Sample Call**:
 
 ```
-$ curl -H "Content-Type: text/csv" \
-  --data-binary "@time_series_covid19_confirmed_global.csv" \
-  -X POST https://covid-monitor-61.herokuapp.com/time_series/data?type=confirmed
+$ curl --location --request POST 'https://covid-monitor-61.herokuapp.com/time_series/data?type=confirmed' \
+  --header 'Content-Type: text/csv' \
+  --data-binary '@time_series_covid19_confirmed_global.csv'
 ```
 
