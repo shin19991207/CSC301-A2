@@ -21,8 +21,9 @@ def load_data():
         return fail(400, "content type is not correct", "please check if your file is a csv file")
 
     table_name = request.args.get('type')
-    if table_name not in ['confirmed', 'deaths', 'recovered', 'active']:
-        return fail(400, "content type is not correct", "type argument should be one of confirmed, active, "
+    if table_name not in ['confirmed', 'deaths', 'recovered']:
+        print(table_name)
+        return fail(400, "content type is not correct", "type argument should be one of confirmed, "
                                                         "deaths, recovered.")
 
     # read in binary data (csv file)
@@ -99,7 +100,7 @@ def query_data():
     data = request.get_json()
     missing = check_request(required_parameters, data)
     if missing[0] != "" or missing[1] != "":
-        return fail(400, "Missing required parameter(s)", "Missing required parameter(s): " + missing[0] + 'Missing parameter "Country/Region" for location(s): ' + missing[1])
+        return fail(400, "Missing required parameter(s)", "Missing required parameter(s): " + missing[0] + '. Missing parameter "Country/Region" for location(s): ' + missing[1])
 
     types = data["types"]
     locations = data["locations"]

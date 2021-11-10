@@ -15,9 +15,9 @@ app.register_blueprint(time_series, url_prefix='/time_series', debug= True)
 def hello():
     env = os.environ.get('PYTHON_ENV')
     if env == "production":
-        return "production"
+        return "Production environment"
     else:
-        return "Hello World!"
+        return "Development environment"
 
 
 if __name__ == '__main__':
