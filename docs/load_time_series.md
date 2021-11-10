@@ -36,7 +36,7 @@ For example, if you download the file to the **Desktop folder** in your computer
 
 | Name | Type    | Required                                         | Description | Example |
 | ---- | ------- | ------------------------------------------------------------ | ----------- | ---- |
-| type | param | Yes      | The cases type of the provided time series file. It should be one of: `confirmed`, `deaths`, `recovered` or  `active`. Notice that the type is specified in the title of the file. <br/><br/>**For example**, if you upload file `time_series_covid19_confirmed_global.csv`, then you need to pass parameter type as `confirmed` | `confirmed` |
+| type | param | Yes      | The cases type of the provided time series file. It should be one of: `confirmed`, `deaths`, or `recovered`. Notice that the type is specified in the title of the file. <br/><br/>**For example**, if you upload file `time_series_covid19_confirmed_global.csv`, then you need to pass parameter type as `confirmed` | `confirmed` |
 
 **Success Response**:
 
