@@ -18,7 +18,7 @@ Upload or update a time series formatted csv file data.
 
 | Name | Type    | Description                                                  | Example     |
 | ---- | ------- | ------------------------------------------------------------ | ----------- |
-| type | param | The cases type of the provided time series file. It should be one of: `confirmed`, `deaths`, `recovered` or  `active` | `confirmed` |
+| type | param | The cases type of the provided time series file. It should be one of: `confirmed`, `deaths`, or `recovered` | `confirmed` |
 
 **Success Response**:
 
