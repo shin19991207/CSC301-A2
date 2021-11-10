@@ -5,10 +5,10 @@ import unittest
 # from flask import request, jsonify
 import requests
 
+
 # import sys
 #
 # sys.path.insert(0, '../../src')
-
 
 
 class TestLoadDailyReports(TestCase):
@@ -26,19 +26,20 @@ class TestLoadDailyReports(TestCase):
     def test_query_data_success(self):
         url = 'https://covid-monitor-61.herokuapp.com/daily_reports/cases'
         body = {"return_type": "json",
-                "date": "01/01/21",
-                "types": ["Confirmed"],
+                "types": ["Confirmed", "Deaths", "Active"],
                 "locations":
                     [
-                        {"Country/Region": "Albania"},
+                        {"Country/Region": "Belgium"},
                         {"Country/Region": "Canada", "Province/State": "Ontario"},
-                        {"Country/Region": "Australia", "Province/State": "Queensland",
+                        {"Country/Region": "Australia",
+                         "Province/State": "Queensland",
                          "Combined_Key": "Australian Capital Territory, Australia"}
                     ]
                 }
         r = requests.post(url, json=body, headers={"Content-Type": "application/json"})
+        print(r.json())
         self.assertEqual(r.status_code, 200)
-        
+
 
 if __name__ == '__main__':
     unittest.main()
