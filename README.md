@@ -15,10 +15,8 @@
 
 * Morgan (driver), Yanling (navigator)
 
-  * **Feature**: Query data
-    * 
-  * **Feature**:  Writing unit test and debugging code functionality
-    * I (Morgan) was a driver when writing the unit test and debugging the code functionality of our program. The debugging step is always a tough process in writing a program, since it is often the codes that you are confident with that cause the error. The pair programming process went quite well and faster the pace of debugging. When an error arose in our program or a feature did not work, the navigator (Yanling) would ask me to explain the code line by line to her. Often, through the procedure of justifying each line of code and conveying my initial thought on doing these steps, I could find out what and where went wrong by myself, or my partner would point out the steps that she found unworkable.
+  * **Feature**:  Write unit test and debug code functionality
+    * I (Morgan) was the driver when writing the unit test and debugging the code functionality of our program. The debugging step is always a tough process in writing a program, since it is often the codes that you are confident with that cause the error. The pair programming process went quite well and faster the pace of debugging. When an error arose in our program or a feature did not work, the navigator (Yanling) would ask me to explain the code line by line to her. Often, through the procedure of justifying each line of code and conveying my initial thought on doing these steps, I could find out what and where went wrong by myself, or my partner would point out the steps that she found unworkable.
     * **Reflection**: I enjoyed doing pair programming with my partner as it was more productive than if I was debugging alone. Such a process helps me to find out what and where went wrong more efficiently, although it was sometimes hard to understand the changes navigator want me to make by just having her telling me the code or the functions and modules to use orally. 
 
 ## Program design
@@ -26,7 +24,7 @@
 ### Design Decisions
 
  * We supports only files of **global** data to be added or uploaded to our program. The global data are those csv files ended with "global" such as `time_series_covid19_confirmed_global.csv` Since our program checks if a file is in the correct format when the user tries to upload a data file, we need the uploaded files to be in a consistent format. Since the global and US data files are formatted differently, we choose to support only data files in the **global** data format.
- * We use Heroku Postgres to store the uploaded data from user. Since there is an enforced row limits of 10,000 rows in our database, we make decision on the maximum number of data files that can be saved to our program according to the limitations of our database used mentioned above. Since each global daily report contains approximately 5000 rows, we can allow at most one daily report to exist in or to be saved into our database. Even though each global time series data file contains approximately 300 rows, and thus at most 4 time series data can be saved into our database. However, since we can't stop user from requesting and the database might be full after several requests. Then users might not able to load any more data to the database, which results in a "dead" API. We could delete old data when the database is about to be full by counting the number of rows added to the database. However, we think that this design is not user friendly. Firstly, users are not informed explicitly which old files are deleted, and thus they might upload data each time before they do queries to avoid potential errors. Also, we think that if our API requires users to load old files sometimes and do not require them to upload old files in another cases, it is confusing for users. **To reduce the inconsistency cross requests, we decide to make users to upload data each time before querying on them and once they upload a file in the same format, the old file in the same format will be deleted**.
+ * We use Heroku Postgres to store the uploaded data from user. Since there is an enforced row limits of 10,000 rows in our database, we make decision on the maximum number of data files that can be saved to our program according to the limitations of our database used mentioned above. Since each global daily report contains approximately 5000 rows, we can allow at most one daily report to exist in or to be saved into our database. Even though each global time series data file contains approximately 300 rows, and thus at most 3 time series data can be saved into our database. However, since we can't stop user from requesting and the database might be full after several requests. Then users might not able to load any more data to the database, which results in a "dead" API. We could delete old data when the database is about to be full by counting the number of rows added to the database. However, we think that this design is not user friendly. Firstly, users are not informed explicitly which old files are deleted, and thus they might upload data each time before they do queries to avoid potential errors. Also, we think that if our API requires users to load old files sometimes and do not require them to upload old files in another cases, it is confusing for users. **To reduce the inconsistency cross requests, we decide to make users to upload data each time before querying on them and once they upload a file in the same format, the old file in the same format will be deleted**.
 
 ### Relationships between objects
 
@@ -55,7 +53,7 @@ The pattern says that code should be open for extension and closed for modificat
 
   * Time Series Data (`/time_series/data?type={type}`):
     * The file format should be consistent and follows the format of `time_series_covid19_{type}_global.csv` specified [here](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series). Note that our program only accepts the format of **global** time series data, that is, any files with the format of `time_series_covid19_{type}_US.csv` will not be accepted and will cause an error response with code 400.
-    * `type` param in the url endpoint should be one of `confirmed`, `deaths`, `recovered`, or `active`.
+    * `type` param in the url endpoint should be one of `confirmed`, `deaths`, or `recovered`.
     
   * Daily Reports Data (`/daily_reports/data`):
     * The file format should be consistent and follows the format of the **global** daily reports specified [here](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports). Note that files formatted as US daily reports are not accepted and will cause an error response with code 400.
@@ -63,7 +61,7 @@ The pattern says that code should be open for extension and closed for modificat
 * **Update existing files**: The url endpoint is as same as the one for adding a new data file.
 
   * Time Series Data (`/time_series/data?type={type}`):
-    * Our program can save up to 4 time series data, one for each `type`. If a same `type` of time series data file is uploaded again, the new information will be reflected in our program.
+    * Our program can save up to 3 time series data, one for each `type` excluding `Active` case type. If a same `type` of time series data file is uploaded again, the new information will be reflected in our program.
 
   * Daily Reports Data (`/daily_reports/data`):
     * Our proram can save up to 1 daily report data. If a daily report is uploaded again, the new information will be reflected in our program.
@@ -72,7 +70,7 @@ The pattern says that code should be open for extension and closed for modificat
 
   * Time Series Data (`/time_series/cases`):
     * The user can query data for any range of dates (>= 1 day), as long as the start and end dates provided are in the uploaded time series data.
-    * Type `Active` can only be queried when all three other types are all available in our program. 
+    * Type `Active` can only be queried when all three other types are all available in our program. The data of `Active` case type is calculated as `Confirmed - Deaths - Recovered`.
   
   * Daily Reports Data (`/daily_reports/cases`):
     * The user can only query data on the date of the most recent-uploaded daily report.
@@ -106,15 +104,6 @@ The pattern says that code should be open for extension and closed for modificat
 ### Accessing the API Online
 
 The API is deployed to https://covid-monitor-61.herokuapp.com/ and calls can be made according to the [REST-API-Documentation](#rest-api-documentation).
-
-### Recommeded Steps for Using the API
-
-Step1: Please check our [API docuementation](https://documenter.getpostman.com/view/16848767/UVC5DmxK#6fc4c4d6-ec60-4a50-ba71-245ed8883f64)
-
-Step2: 
-
-- [ ] Add some screenshots
-
 
 ## Tests
 
