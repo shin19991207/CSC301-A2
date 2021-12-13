@@ -140,7 +140,7 @@ The API is deployed to https://covid-monitor-61.herokuapp.com/ and calls can be 
 
 ### Continuous Integration
 
-* We set up [CI](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/.github/workflows/unittest.yml) with Github Actions to run our unit test each time we make changes on the [main branch](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/tree/main).
+* We set up [CI](https://github.com/shin19991207/CSC301-A2/tree/main/.github/workflows/unittest.yml) with Github Actions to run our unit test each time we make changes on the [main branch](https://github.com/shin19991207/CSC301-A2/tree/main).
 
 
 ## REST API Documentation
@@ -150,10 +150,10 @@ The API is deployed to https://covid-monitor-61.herokuapp.com/ and calls can be 
 
 ### Endpoints
 
-* [Load Time Series Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/load_time_series.md)
-* [Query Time Series Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/query_time_series.md)
-* [Load Daily Reports Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/load_daily_reports.md)
-* [Query Daily Reports Data](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/query_daily_reports.md)
+* [Load Time Series Data](https://github.com/shin19991207/CSC301-A2/tree/main/docs/load_time_series.md)
+* [Query Time Series Data](https://github.com/shin19991207/CSC301-A2/tree/main/docs/query_time_series.md)
+* [Load Daily Reports Data](https://github.com/shin19991207/CSC301-A2/tree/main/docs/load_daily_reports.md)
+* [Query Daily Reports Data](https://github.com/shin19991207/CSC301-A2/tree/main/docs/query_daily_reports.md)
 
 
 
