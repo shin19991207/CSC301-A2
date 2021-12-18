@@ -86,7 +86,7 @@ We didn't create objects in our program explicitly but we create two endpoints w
 * Our program is compatible with and tested on Mac OS. If running locally, please note that the program might not be compatible with and is not guaranteed to be able to run on any other operating systems, including Ubuntu Linux, since some required packages or packages version specified in `requirements.txt` is not supported on specific os.
 * To ensure proper configuration while running on a local machine, ensure that you follow the following steps:
 
-1. `git clone https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207.git && cd assignment-2-61-yanling-h-shin19991207`
+1. `git clone https://github.com/shin19991207/CSC301-A2.git && cd CSC301-A2`
 
 2. A `.env` file is required for environment variables and requires the following variables to be defined. Note that this file must be placed in the src root directory `src/.env`
 
@@ -112,7 +112,7 @@ The API is deployed to https://covid-monitor-61.herokuapp.com/ and calls can be 
 * We design unit tests to test our code functionality for the util functions and routers. 
 * We set up a small test table in our Heroku Postgres database to test the behaviors and functionalities related to databases in `utils.py`. 
 * We test the routers by sending requests in expected format and check if the respond is successful.
-* We have 88% line coverage in the most recent test as shown [here](https://github.com/csc301-fall-2021/assignment-2-61-yanling-h-shin19991207/blob/main/docs/test_coverage.png) and below.
+* We have 88% line coverage in the most recent test as shown [here](https://github.com/shin19991207/CSC301-A2/blob/main/docs/test_coverage.png) and below.
 
  ```
  $ coverage run -m unittest         
