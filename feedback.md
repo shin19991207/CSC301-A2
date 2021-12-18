@@ -1,4 +1,4 @@
-A2 Rubric
+## A2 Rubric
 
 | Criteria | Pts |
 | -------- | ----|
